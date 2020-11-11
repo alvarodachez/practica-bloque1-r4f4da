@@ -25,7 +25,7 @@
 //    * Al hacer click sobre el botón con el texto "Page color" deberá aplicarse el color de ese item al color de fondo de la página (elemento body).
 
 // Buena suerte!
-
+let cuerpo = document.getElementsByTagName("body")[0];
 const colorList = [
   {
     colorName: "white",
@@ -60,9 +60,39 @@ const colorList = [
     hex: "#c0c0c0"
   }
 ];
+
+cuerpo.addEventListener("click", evento => {
+  evento.stopPropagation();
+  alert("body");
+});
+
 const createDivEvent = (elemento, color) => {
-  elemento.addEventListener("click", () => {
+  elemento.addEventListener("click", evento => {
+    evento.stopPropagation();
     alert(color);
+  });
+};
+
+const changeBodyColor = (elemento, color) => {
+  elemento.addEventListener("click", evento => {
+    evento.stopPropagation();
+    cuerpo.style.backgroundColor = color;
+  });
+};
+
+const changeNextItemColor = (elemento, color) => {
+  elemento.addEventListener("click", evento => {
+    evento.stopPropagation();
+    elemento.parentNode.nextSibling.style.backgroundColor = color;
+  });
+};
+
+const changeFirstItemColor = (elemento, color) => {
+  elemento.addEventListener("click", evento => {
+    evento.stopPropagation();
+    elemento.parentNode.parentNode.getElementsByTagName(
+      "li"
+    )[1].style.backgroundColor = color;
   });
 };
 const createList = () => {
@@ -94,10 +124,18 @@ const createList = () => {
     let textoNextItemButton = document.createTextNode("Next Item Color");
     nextItemButton.appendChild(textoNextItemButton);
 
+    if (cont != 8) {
+      changeNextItemColor(nextItemButton, i.hex);
+    } else {
+      changeFirstItemColor(nextItemButton, i.hex);
+    }
+
     let pageColorButton = document.createElement("button");
     pageColorButton.setAttribute("class", "color-set");
     let textoPageColorButton = document.createTextNode("Page Color");
     pageColorButton.appendChild(textoPageColorButton);
+
+    changeBodyColor(pageColorButton, i.hex);
 
     elementoLi.appendChild(nombreColor);
     elementoLi.appendChild(muestra);
