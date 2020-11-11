@@ -25,7 +25,11 @@
 //    * Al hacer click sobre el botón con el texto "Page color" deberá aplicarse el color de ese item al color de fondo de la página (elemento body).
 
 // Buena suerte!
+
+/** Elemento Body del html */
 let cuerpo = document.getElementsByTagName("body")[0];
+
+/** Array que se recorre para crear la lista */
 const colorList = [
   {
     colorName: "white",
@@ -61,11 +65,17 @@ const colorList = [
   }
 ];
 
+/**
+ * Lanza la alerta para el body
+ */
 cuerpo.addEventListener("click", evento => {
   evento.stopPropagation();
   alert("body");
 });
 
+/**
+ * Lanza la alerta para cada elemento de la lista
+ */
 const createDivEvent = (elemento, color) => {
   elemento.addEventListener("click", evento => {
     evento.stopPropagation();
@@ -73,6 +83,9 @@ const createDivEvent = (elemento, color) => {
   });
 };
 
+/**
+ * Lanza el cambio de color del body
+ */
 const changeBodyColor = (elemento, color) => {
   elemento.addEventListener("click", evento => {
     evento.stopPropagation();
@@ -80,6 +93,9 @@ const changeBodyColor = (elemento, color) => {
   });
 };
 
+/**
+ * Lanza el cambio de color para el siguiente item
+ */
 const changeNextItemColor = (elemento, color) => {
   elemento.addEventListener("click", evento => {
     evento.stopPropagation();
@@ -87,6 +103,9 @@ const changeNextItemColor = (elemento, color) => {
   });
 };
 
+/**
+ * Lanza el cambio de color para el primer item
+ */
 const changeFirstItemColor = (elemento, color) => {
   elemento.addEventListener("click", evento => {
     evento.stopPropagation();
@@ -95,6 +114,10 @@ const changeFirstItemColor = (elemento, color) => {
     )[1].style.backgroundColor = color;
   });
 };
+
+/**
+ * Crea la lista y los diferentes eventos
+ */
 const createList = () => {
   let list = document.getElementsByClassName("color-list")[0];
   let cont = 1;
@@ -146,4 +169,6 @@ const createList = () => {
     cont++;
   }
 };
+
+/** Ejecuta las funcionalidades */
 createList();
